@@ -12,6 +12,8 @@ var init = require('./config/init')(),
  * Please note that the order of loading is important.
  */
 
+require('mongoose-middleware').initialize(mongoose);
+
 // Bootstrap db connection
 var db = mongoose.connect(config.db, function(err) {
 	if (err) {

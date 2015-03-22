@@ -1,19 +1,34 @@
-<section data-ng-controller="<%= classifiedPluralName %>Controller" data-ng-init="find()">
+<section data-ng-controller="<%= classifiedPluralName %>Controller">
     <div class="page-header">
         <h1><%= humanizedPluralName %></h1>
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="<%= camelizedSingularName %> in <%= camelizedPluralName %>" data-ng-href="#!/<%= slugifiedPluralName %>/{{<%= camelizedSingularName %>._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="<%= camelizedSingularName %>.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="<%= camelizedSingularName %>.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="<%= camelizedSingularName %>.name"></h4>
-        </a>
+
+    <div class="pull-right">
+      <a type="button" class="btn btn-success" href="/#!/<%= slugifiedPluralName %>/create">
+        <i class="glyphicon glyphicon-open"></i> New <%= classifiedSingularName %>
+      </a>
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!<%= camelizedPluralName %>.$resolved || <%= camelizedPluralName %>.length">
-    	No <%= humanizedPluralName %> yet, why don't you <a href="/#!/<%= slugifiedPluralName %>/create">create one</a>?
+
+    <div>
+        <table ng-table="tableParams" show-filter="true">
+            <tr ng-repeat="<%= camelizedSingularName %> in $data">
+                <td data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }">{{<%= camelizedSingularName %>.name}}</td>
+                <td>
+                    <div class="table-actions">
+                <td>
+                   <div class="table-actions">
+                        <a class="btn btn-default" title="View" href="/#!/<%= slugifiedPluralName %>/{{<%= camelizedSingularName %>._id}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                        <a class="btn btn-default" title="Edit" href="/#!/<%= slugifiedPluralName %>/{{<%= camelizedSingularName %>._id}}/edit">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="remove(<%= camelizedSingularName %>)" item="<%= camelizedSingularName %>">
+                  				<span class="glyphicon glyphicon-remove-circle"></span>
+                  			</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 </section>

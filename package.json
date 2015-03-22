@@ -1,13 +1,13 @@
 {
-	"name": "generator-meanjs",
-	"version": "0.1.12",
-	"description": "MEAN.JS Official Yeoman Generator",
+	"name": "generator-meanjs-table",
+	"version": "0.0.1",
+	"description": "MEAN.JS Table Yeoman Generator",
 	"main": "app/index.js",
-	"repository": "meanjs/generator-meanjs",
+	"repository": "jlmonteagudo/generator-meanjs-table",
 	"author": {
-		"name": "MEAN.JS Team",
-		"email": "support@meanjs.org",
-		"url": "https://github.com/meanjs"
+		"name": "Jose Luis Monteagudo",
+		"email": "jl_monteagudo@yahoo.es",
+		"url": "http://www.jlmonteagudo.com"
 	},
 	"engines": {
 		"node": ">=0.10.0"

@@ -1,21 +1,28 @@
-<section data-ng-controller="<%= classifiedPluralName %>Controller" data-ng-init="findOne()">
+<section data-ng-controller="<%= classifiedPluralName %>Controller" data-ng-init="toView<%= classifiedSingularName %>()">
 	<div class="page-header">
 		<h1 data-ng-bind="<%= camelizedSingularName %>.name"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == <%= camelizedSingularName %>.user._id))">
-		<a class="btn btn-primary" href="/#!/<%= slugifiedPluralName %>/{{<%= camelizedSingularName %>._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			<i class="glyphicon glyphicon-trash"></i>
-		</a>
+
+	<div class="col-md-12">
+
+		<form novalidate>
+			<formly-form model="<%= camelizedSingularName %>" fields="formFields">
+			</formly-form>
+		</form>
+
+		<hr/>
+		<div data-ng-show="((authentication.user) && (authentication.user._id == <%= camelizedSingularName %>.user._id))">
+			<a class="btn btn-success" href="/#!/<%= camelizedPluralName %>/{{<%= camelizedSingularName %>._id}}/edit">
+				<i class="glyphicon glyphicon-edit"></i> Edit
+			</a>
+			<a class="btn btn-danger" title="Remove" ng-really-message="Are you sure ?" ng-really-click="remove()" item="<%= camelizedSingularName %>">
+				<i class="glyphicon glyphicon-remove-circle"></i> Delete
+			</a>
+			<a class="btn btn-primary" href="/#!/<%= camelizedPluralName %>">
+				<i class="glyphicon glyphicon-list"></i> List <%= classifiedPluralName %>
+			</a>
+		</div>
+
 	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="<%= camelizedSingularName %>.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="<%= camelizedSingularName %>.user.displayName"></span>
-		</em>
-	</small>
+
 </section>

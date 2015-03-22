@@ -13,6 +13,10 @@
 		"angular-sanitize": "~1.2",<% } %>
 		"angular-bootstrap": "~0.11.2",
 		"angular-ui-utils": "~0.1.1",
-		"angular-ui-router": "~0.2.11"
+		"angular-ui-router": "~0.2.11",
+		"ng-table": "~0.3.3",
+		"api-check": "~6.0.10",
+    "angular-formly": "~4.0.11",
+    "angular-formly-templates-bootstrap": "~4.0.3"
 	}
 }

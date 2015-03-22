@@ -42,11 +42,6 @@ var MeanGenerator = yeoman.generators.Base.extend({
 		}, {
 			name: 'appAuthor',
 			message: 'What is your company/author name?'
-		}, {
-			type: 'confirm',
-			name: 'addArticleExample',
-			message: 'Would you like to generate the article example CRUD module?',
-			default: true
 		}];
 
 		this.prompt(prompts, function(props) {
@@ -54,7 +49,6 @@ var MeanGenerator = yeoman.generators.Base.extend({
 			this.appDescription = props.appDescription;
 			this.appKeywords = props.appKeywords;
 			this.appAuthor = props.appAuthor;
-			this.addArticleExample = props.addArticleExample;
 
 			this.slugifiedAppName = this._.slugify(this.appName);
 			this.humanizedAppName = this._.humanize(this.appName);
@@ -135,6 +129,7 @@ var MeanGenerator = yeoman.generators.Base.extend({
 		this.directory('public/modules/core/config');
 		this.directory('public/modules/core/controllers');
 		this.directory('public/modules/core/css');
+		this.directory('public/modules/core/directives');
 		this.directory('public/modules/core/img');
 		this.directory('public/modules/core/services');
 		this.directory('public/modules/core/tests');
@@ -172,21 +167,6 @@ var MeanGenerator = yeoman.generators.Base.extend({
 		this.copy('gitignore', '.gitignore');
 		this.copy('slugignore', '.slugignore');
 		this.copy('travis.yml', '.travis.yml');
-	},
-
-	renderArticleExample: function() {
-		// Copy example files if desired
-		if (this.addArticleExample) {
-			// Copy Express files
-			this.copy('app/controllers/articles.server.controller.js');
-			this.copy('app/models/article.server.model.js');
-			this.copy('app/routes/articles.server.routes.js');
-			this.copy('app/tests/article.server.model.test.js');
-			this.copy('app/tests/article.server.routes.test.js');
-
-			// Copy AngularJS files
-			this.directory('public/modules/articles');
-		}
 	},
 
 	renderApplicationEnvironmentConfigFiles: function() {

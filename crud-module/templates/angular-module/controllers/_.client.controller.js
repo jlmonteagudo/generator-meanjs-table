@@ -1,23 +1,24 @@
 'use strict';
 
 // <%= humanizedPluralName %> controller
-angular.module('<%= slugifiedPluralName %>').controller('<%= classifiedPluralName %>Controller', ['$scope', '$stateParams', '$location', 'Authentication', '<%= classifiedPluralName %>',
-	function($scope, $stateParams, $location, Authentication, <%= classifiedPluralName %>) {
+angular.module('<%= slugifiedPluralName %>').controller('<%= classifiedPluralName %>Controller', ['$scope', '$stateParams', '$location', 'Authentication', '<%= classifiedPluralName %>', 'TableSettings', '<%= classifiedPluralName %>Form',
+	function($scope, $stateParams, $location, Authentication, <%= classifiedPluralName %>, TableSettings, <%= classifiedPluralName %>Form ) {
 		$scope.authentication = Authentication;
+		$scope.tableParams = TableSettings.getParams(<%= classifiedPluralName %>);
+		$scope.<%= camelizedSingularName %> = {};
+
+		$scope.setFormFields = function(disabled) {
+			$scope.formFields = <%= classifiedPluralName %>Form.getFormFields(disabled);
+		};
+
 
 		// Create new <%= humanizedSingularName %>
 		$scope.create = function() {
-			// Create new <%= humanizedSingularName %> object
-			var <%= camelizedSingularName %> = new <%= classifiedPluralName %> ({
-				name: this.name
-			});
+			var <%= camelizedSingularName %> = new <%= classifiedPluralName %>($scope.<%= camelizedSingularName %>);
 
 			// Redirect after save
 			<%= camelizedSingularName %>.$save(function(response) {
 				$location.path('<%= slugifiedPluralName %>/' + response._id);
-
-				// Clear form fields
-				$scope.name = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -25,19 +26,19 @@ angular.module('<%= slugifiedPluralName %>').controller('<%= classifiedPluralNam
 
 		// Remove existing <%= humanizedSingularName %>
 		$scope.remove = function(<%= camelizedSingularName %>) {
-			if ( <%= camelizedSingularName %> ) { 
-				<%= camelizedSingularName %>.$remove();
 
-				for (var i in $scope.<%= camelizedPluralName %>) {
-					if ($scope.<%= camelizedPluralName %> [i] === <%= camelizedSingularName %>) {
-						$scope.<%= camelizedPluralName %>.splice(i, 1);
-					}
-				}
+			if ( <%= camelizedSingularName %> ) {
+				<%= camelizedSingularName %> = <%= classifiedPluralName %>.get({<%= camelizedSingularName %>Id:<%= camelizedSingularName %>._id}, function() {
+					<%= camelizedSingularName %>.$remove();
+					$scope.tableParams.reload();
+				});
+
 			} else {
 				$scope.<%= camelizedSingularName %>.$remove(function() {
-					$location.path('<%= slugifiedPluralName %>');
+					$location.path('<%= camelizedPluralName %>');
 				});
 			}
+
 		};
 
 		// Update existing <%= humanizedSingularName %>
@@ -51,16 +52,18 @@ angular.module('<%= slugifiedPluralName %>').controller('<%= classifiedPluralNam
 			});
 		};
 
-		// Find a list of <%= humanizedPluralName %>
-		$scope.find = function() {
-			$scope.<%= camelizedPluralName %> = <%= classifiedPluralName %>.query();
+
+
+		$scope.toView<%= classifiedSingularName %> = function() {
+			$scope.<%= camelizedSingularName %> = <%= classifiedPluralName %>.get( {<%= camelizedSingularName %>Id: $stateParams.<%= camelizedSingularName %>Id} );
+			$scope.setFormFields(true);
 		};
 
-		// Find existing <%= humanizedSingularName %>
-		$scope.findOne = function() {
-			$scope.<%= camelizedSingularName %> = <%= classifiedPluralName %>.get({ 
-				<%= camelizedSingularName %>Id: $stateParams.<%= camelizedSingularName %>Id
-			});
+		$scope.toEdit<%= classifiedSingularName %> = function() {
+			$scope.<%= camelizedSingularName %> = <%= classifiedPluralName %>.get( {<%= camelizedSingularName %>Id: $stateParams.<%= camelizedSingularName %>Id} );
+			$scope.setFormFields(false);
 		};
+
 	}
+
 ]);
