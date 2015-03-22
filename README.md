@@ -34,9 +34,9 @@ This will create both AngularJS and Express files supporting full CRUD functiona
 
 This subgenerator will create an entity with only one property called 'name'. If we want to add new properties to our entity, we weed to follow these three steps:
 
-* Add new properties to the Mongoose Schema in app/models/<module-name>.server.model.js
-* Add new properties to the angular-formly array properties in public/modules/<module-name>/services/<module-name>.form.client.service.js
-* Add new columns for the new properties in the HTML table in public/modules/<module-name>/views/list-<module-name>.client.view.html
+* Add new properties to the Mongoose Schema in app/models/**module-name**.server.model.js
+* Add new properties to the angular-formly array properties in public/modules/**module-name**/services/**module-name**.form.client.service.js
+* Add new columns for the new properties in the HTML table in public/modules/**module-name**/views/list-**module-name**.client.view.html
 
 
 ## License
