@@ -10,6 +10,10 @@ The meanjs generator displays database records like a blog structure. However, w
 
 **Note:** meanjs-table generator uses [angular-formly](https://github.com/formly-js/angular-formly) to display forms so, as we will see below, it's very easy and very fast adapt our forms to our entities.
 
+## Video Tutorial
+
+[![MEANJS Table](http://www.jlmonteagudo.com/wp-content/uploads/2015/04/video-generator-meanjs-table.png)](https://youtu.be/G6OlAjvzXfc)
+
 ## Getting Started
 
 At first place, you will need to install the meanjs-table generator:
