@@ -30,7 +30,9 @@
         filterDelay: 0,
       };
 
+      /* jshint ignore:start */
       var tableParams = new ngTableParams(params, settings);
+      /* jshint ignore:end */
 
       var getParams = function(Entity) {
         tableParams.settings({getData: getData(Entity)});
